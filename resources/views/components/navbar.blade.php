@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-100">
-    <head>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/[email protected]/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
-    </head>
-    <body class="h-full">
-<div class="min-h-full">
-  <nav class="bg-gray-800" x-data="{ isOpen: false }">
+<nav class="bg-gray-800" x-data="{ isOpen: false }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
@@ -36,11 +25,11 @@
           <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
-{{--                 <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="absolute -inset-1.5"></span>
                   <span class="sr-only">Open user menu</span>
                   <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                </button> --}}
+                </button>
               </div>
 
               <div 
@@ -113,74 +102,3 @@
       </div>
     </div>
   </nav>
-
-  <header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Beranda</h1>
-    </div>
-  </header>
-  
-  <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      
-
-        <div class="login-box">
-            <!-- /.login-logo -->
-            <div class="card card-outline card-primary">
-              <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>eRDIPS</b></a>
-              </div>
-              <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-                      @error('loginError')
-                          <div class="alert alert-danger">
-                              <strong>ERROR</strong>
-                              <p>{{ $message }}</p>
-                          </div>
-                      @enderror
-                <form method="post">
-                  @csrf
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" name="Email">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" name="Password">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-          
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                </form>
-                <!-- /.social-auth-links -->
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-
-    </div>
-  </main>
-</div>
-    </body>
-</html>
-
