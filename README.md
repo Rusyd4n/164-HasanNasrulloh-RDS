@@ -1,5 +1,5 @@
-# 164-HasanNasrulloh-eRDIPS
-Aplikasi ini bernama eRDIPS (Raport Digital Peserta Didik Sekolah) ini adalah aplikasi raport untuk guru dan siswa di tingkat sekolah menengah Terdapat 4 akses user:
+# 164-HasanNasrulloh-RDS
+Aplikasi ini bernama RDS (Raport Digital Sekolah) ini adalah aplikasi raport untuk guru dan siswa di tingkat sekolah menengah Terdapat 4 akses user:
 
 - Admin - Full Access
 - Wali Kelas - Input nilai dan cetak raport
