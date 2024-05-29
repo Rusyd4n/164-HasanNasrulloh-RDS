@@ -22,8 +22,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+ 
+ 
         @include('layout.main-content')
-          <!-- /.col -->
+ 
+ 
+        <!-- /.col -->
         </div>
         <!-- /.row -->
 
