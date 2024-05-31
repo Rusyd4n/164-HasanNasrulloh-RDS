@@ -6,68 +6,112 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class UserController extends Controller
-{
+class UserController extends Controller{
     public function index(){
-        // GET data dari table pegawai
-    	$civitas = DB::table('civitas')->get();
- 
-    	// VIEW data pegawai di view index
-    	return view('index',['civitas' => $civitas]);
+            $users = [
+                [
+                    "id" => 1,
+                    "nama" => "Abu Bakar",
+                    "umur" => 35
+                ],
+                [
+                    "id" => 2,
+                    "nama" => "Umar",
+                    "umur" => 37
+                ],
+                [
+                    "id" => 3,
+                    "nama" => "Utsman",
+                    "umur" => 32
+                ],
+                [
+                    "id" => 4,
+                    "nama" => "Ali",
+                    "umur" => 30
+                ]
+                ];
+        
+            return view('users.users', [
+                'users'=>$users
+            ]);
     }
 
-    public function tambah(){
-        //memanggil view tambah
-        return view('tambah');
+    public function show(string $id){
+        $users =[
+            [
+                "id" => 1,
+                "nama" => "Abu Bakar",
+                "umur" => 35
+            ],
+            [
+                "id" => 2,
+                "nama" => "Umar",
+                "umur" => 37
+            ],
+            [
+                "id" => 3,
+                "nama" => "Utsman",
+                "umur" => 32
+            ],
+            [
+                "id" => 4,
+                "nama" => "Ali",
+                "umur" => 30
+            ]
+        ];
+
+        $result = null;
+        foreach($users as $user){
+            if ($user['id'] == $id) {
+                $result = $user;
+            }
+        }
+    
+        return view('users.detail',[
+            'user' => $result
+            
+        ]);
+
+        dd($result);
+    }
+
+    //menampilkan view form
+    public function create(){
+        return view('users.create');
     }
 
     public function store(Request $request){
-        //insert data ke table civitas
-        DB::table('civitas')->insert([
-            'photo' => $request->photo,
-            'nama' => $request->nama,
-            'gender' => $request->gender,
-            'tmpt_lahir' => $request->tmpt_lahir,
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
-            'phone' => $request->phone,
-            'email' => $request->email
+
+        /*VALIDASI MANUAL
+        $payload    = $request->all();
+        if ($payload['nama']==null || $payload['umur']==null) {
+            return view('users.create',['error' => "input salah"]);
+        }    
+        return view ('users.create',[
+            'payload' => $payload,
         ]);
 
-        //redirect ke halaman civitas
-        return redirect('/civitas');
-    }
+        */
 
-    public function hapus($id){
-        //menghapus data civitas by id
-        DB::table('civitas')->where('id',$id)->delete();
+        //VALIDASI laravel
+        $payload = $request->validate([
+            'nama' => ['required', 'min:3'],
+            'umur' => ['required', 'min:1', 'integer'],
 
-        //redirect ke halaman civitas
-        return redirect ('/civitas');
-    }
+            //validasi untuk memproses upload file
+            'gambar' => ['required', 'file', 'extensions:png,jpg,jpeg']
 
-    public function edit($id){
-        //GET data civitas by id
-        $civitas = DB::table('civitas')->where('id',$id)->get();
-
-        //passing data ke view edit.blade.php
-        return view('edit',['civitas' => $civitas]);
-    }
-
-    public function update(Request $request){
-        //update data civitas
-        DB::table('civitas')->where('id',$request->id)->update([
-            'photo' => $request->photo,
-            'nama' => $request->nama,
-            'gender' => $request->gender,
-            'tmpt_lahir' => $request->tmpt_lahir,
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
-            'phone' => $request->phone,
-            'email' => $request->email
         ]);
 
-        //redirect ke halaman civitas
-        return redirect ('/civitas');
+        if ($request->hasFile('gambar')) {
+            $image  = $request->file('gambar');
+            $imageName = time() . "-" . $image->hashName();
+            $image->move('image/', $imageName);
+        }
+
+        return view ('users.create',[
+            'payload' => $payload,
+        ]);
     }
+
 }

@@ -1,30 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Users;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
-{
-    public function login(){
+class AuthController extends Controller{
+    public function loginPage(){
         return view('auth.login');
     }
 
-    public function authenticated(Request $request){
-        $request -> validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+    public function login(Request $request){
+        $user =Users::where('email', $request->email)->first();
 
-        $credentials = $request->only('email','password');
-        
-        if (Auth::attemp($credentials)){
-            $request->session()->regenerate();
-            return redirect('/dashboard');
+        if ($user == null) {
+            return redirect()->back()->with('error','User tidak ditemukan!');
         }
 
-        return back()->withErrors([
-            'loginError' => 'Email atau password salah'
-        ]);
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error','Password salah!');
+        }
+
+        $request->session()->regenerate();
+        $request->session()->put('isLogged','true');
+        $request->session()->put('userld', $user->id);
+        $request->session()->put('role', 'user');
+
+        return redirect()->route('users.index') ;
+
+    }
+
+    public function logout(Request $request){
+        
     }
 }
